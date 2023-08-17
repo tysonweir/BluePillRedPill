@@ -17,8 +17,9 @@ const starWarsCharacters = [
     { name: 'C-3PO', height: 167, mass: 75 },
     { name: 'Chewbacca', height: 228, mass: 112 },
     { name: 'Anakin Skywalker', height: 188, mass: 84 },
-    // Add more Star Wars characters
+    // Add more Star Wars characters here
 ];
+
 
 const lotrCharacters = [
     { name: 'Frodo Baggins', height: 105, mass: 33 },
