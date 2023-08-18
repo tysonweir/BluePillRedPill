@@ -1,11 +1,11 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors'); 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
 
+// Mock character data
 const starWarsCharacters = [
     { name: 'Luke Skywalker', height: 172, mass: 77 },
     { name: 'Darth Vader', height: 202, mass: 136 },
@@ -19,7 +19,6 @@ const starWarsCharacters = [
     { name: 'Anakin Skywalker', height: 188, mass: 84 },
     // Add more Star Wars characters here
 ];
-
 
 const lotrCharacters = [
     { name: 'Frodo Baggins', height: 105, mass: 33 },
@@ -35,12 +34,31 @@ const lotrCharacters = [
     // Add more LOTR characters
 ];
 
+app.use(bodyParser.json());
+
+// Use cors middleware to enable CORS
+app.use(cors());
+
+app.get('/', (req, res) => {
+    res.send('Hello Express App');
+  });
+
+// API routes for blue and red characters
 app.get('/api/starwars', (req, res) => {
-    res.json(starWarsCharacters);
+  res.json(starWarsCharacters);
 });
 
 app.get('/api/lotr', (req, res) => {
-    res.json(lotrCharacters);
+  res.json(lotrCharacters);
 });
 
+// Error handling middleware
+app.use((error, req, res, next) => {
+  console.error(error);
+  res.status(500).json({ message: 'Server error' });
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
 
